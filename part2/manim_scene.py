@@ -367,20 +367,26 @@ class QR_And_Diagonalization(Scene):
         badge5 = make_step_label(5, "Kết quả A = QR")
         badge5.next_to(sec_title, DOWN, buff=0.30)
 
-        # Viết rõ công thức Q = [q1 q2] và R dạng tích vô hướng trước khi ra kết quả
-        panel5 = make_formula_block(
-            [
-                r"Q = [q_1 \quad q_2] = \begin{bmatrix}\tfrac{2}{\sqrt{5}} & -\tfrac{1}{\sqrt{5}} \\ \tfrac{1}{\sqrt{5}} & \tfrac{2}{\sqrt{5}}\end{bmatrix}",
-                r"R = \begin{bmatrix} \langle u_1, q_1 \rangle & \langle u_2, q_1 \rangle \\ 0 & \langle u_2, q_2 \rangle \end{bmatrix} = \begin{bmatrix}\sqrt{5} & \tfrac{4}{\sqrt{5}} \\ 0 & \tfrac{3}{\sqrt{5}}\end{bmatrix}",
-                r"QR = \begin{bmatrix}\tfrac{2}{\sqrt{5}} & -\tfrac{1}{\sqrt{5}} \\ \tfrac{1}{\sqrt{5}} & \tfrac{2}{\sqrt{5}}\end{bmatrix} \begin{bmatrix}\sqrt{5} & \tfrac{4}{\sqrt{5}} \\ 0 & \tfrac{3}{\sqrt{5}}\end{bmatrix} = \begin{bmatrix}2 & 1 \\ 1 & 2\end{bmatrix} = A",
-            ],
-            scale=0.48,
-        )  # Chỉnh scale xuống một chút để không bị tràn lề ngang
-        panel5.move_to(PANEL_X + DOWN * 0.5)
+        # ── Bước 5: Kết quả: A = QR ───────────────────────────────────
+        badge5 = make_step_label(5, "Kết quả A = QR")
+        badge5.next_to(sec_title, DOWN, buff=0.30)
+
+        # Viết rõ công thức Q, tính chi tiết các tích vô hướng, rồi suy ra R
+        panel5 = make_formula_block([
+            r"Q = [q_1 \quad q_2] = \begin{bmatrix}\tfrac{2}{\sqrt{5}} & -\tfrac{1}{\sqrt{5}} \\ \tfrac{1}{\sqrt{5}} & \tfrac{2}{\sqrt{5}}\end{bmatrix}",
+            r"\langle u_1, q_1 \rangle = 2\cdot\tfrac{2}{\sqrt{5}} + 1\cdot\tfrac{1}{\sqrt{5}} = \sqrt{5}",
+            r"\langle u_2, q_1 \rangle = 1\cdot\tfrac{2}{\sqrt{5}} + 2\cdot\tfrac{1}{\sqrt{5}} = \tfrac{4}{\sqrt{5}}",
+            r"\langle u_2, q_2 \rangle = 1\cdot\bigl(-\tfrac{1}{\sqrt{5}}\bigr) + 2\cdot\tfrac{2}{\sqrt{5}} = \tfrac{3}{\sqrt{5}}",
+            r"R = \begin{bmatrix} \langle u_1, q_1 \rangle & \langle u_2, q_1 \rangle \\ 0 & \langle u_2, q_2 \rangle \end{bmatrix} = \begin{bmatrix}\sqrt{5} & \tfrac{4}{\sqrt{5}} \\ 0 & \tfrac{3}{\sqrt{5}}\end{bmatrix}",
+            r"QR = \begin{bmatrix}2 & 1 \\ 1 & 2\end{bmatrix} = A \quad \checkmark",
+        ], scale=0.45)  # Scale được căn chỉnh lại để vừa vặn 6 dòng công thức
+        
+        # Nhích lên một chút (DOWN * 0.4 thay vì 0.5) để khối text có không gian hiển thị
+        panel5.move_to(PANEL_X + DOWN * 0.4) 
 
         self.play(FadeOut(panel4), FadeOut(badge4), run_time=0.5)
         self.play(FadeIn(badge5, shift=DOWN * 0.1), run_time=0.8)
-        self._show_formula_lines(panel5, run_time=0.9, pause=1.25)
+        self._show_formula_lines(panel5, run_time=0.85, pause=1.2)
         self.play(Indicate(q1_arr), Indicate(q2_arr), run_time=1.4)
         self.wait(5)
 
