@@ -442,11 +442,12 @@ class QR_And_Diagonalization(Scene):
         blk_a = diag_block(
             "Bước A: Tìm giá trị riêng từ đa thức đặc trưng",
             [
-                r"\det(A-\lambda I) = (2-\lambda)^2 - 1",
-                r"= \lambda^2 - 4\lambda + 3",
-                r"= (\lambda - 1)(\lambda - 3) = 0",
+                r"A - \lambda I = \begin{bmatrix} 2-\lambda & 1 \\ 1 & 2-\lambda \end{bmatrix}",
+                r"\det(A-\lambda I) = (2-\lambda)(2-\lambda) - 1 \cdot 1",
+                r"= \lambda^2 - 4\lambda + 3 = 0",
                 r"\Rightarrow\; \lambda_1 = 3,\;\lambda_2 = 1",
             ],
+            scale=0.60,
         )
         self.play(FadeIn(blk_a[0], shift=UP * 0.15), run_time=1.0)
         self.wait(0.5)
