@@ -1,8 +1,16 @@
+import sys
+from pathlib import Path
+
 import numpy as np
 
-from gaussian import gaussian_eliminate, back_substitution
+# Ensure imports work regardless of current working directory.
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
 
-from decomposition import qr_decomposition
+from part1.gaussian import back_substitution, gaussian_eliminate
+from part2.decomposition import qr_decomposition
+
 
 def solve_gauss_custom(A, b):
     """Giải bằng Khử Gauss (Của Phần 1)"""
@@ -25,11 +33,12 @@ def solve_qr_custom(A, b):
     y = np.dot(Q_arr.T, b)
 
     x = back_substitution(R.tolist(), y.tolist())
-    
+
     if isinstance(x, str):
         raise ValueError(f"Thế ngược thất bại: {x}")
 
     return np.array(x, dtype=float)
+
 
 def is_diagonally_dominant(A):
     """Kiểm tra điều kiện hội tụ: Ma trận chéo trội hàng"""
@@ -47,10 +56,11 @@ def gauss_seidel(A, b, epsilon=1e-6, max_iterations=1000):
     x = [0.0] * n
 
     if not is_diagonally_dominant(A):
-        pass  
+        pass
 
     for k in range(max_iterations):
         x_old = list(x)
+
         for i in range(n):
             sum1 = sum(A[i][j] * x[j] for j in range(i))
             sum2 = sum(A[i][j] * x_old[j] for j in range(i + 1, n))
@@ -64,6 +74,8 @@ def gauss_seidel(A, b, epsilon=1e-6, max_iterations=1000):
             return x, k + 1
 
     return x, max_iterations
+
+
 def solve_gauss_seidel_custom(A, b):
     """Hàm bọc gọi Gauss-Seidel"""
     A_list = A.tolist()
