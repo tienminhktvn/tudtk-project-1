@@ -14,9 +14,7 @@
 
 ---
 
-## Cấu trúc thư mục
-
-Dự án được tổ chức thành các module độc lập theo đúng cấu trúc yêu cầu của đồ án:
+## Project Structure
 
 ```text
 Group_8/
@@ -55,7 +53,7 @@ pip install -r requirements.txt
 ### 1. Phần 1: Phép khử Gauss và Ứng dụng
 
 - **Source:** Nằm trong thư mục `part1/`. Các thuật toán được cài đặt hoàn toàn thủ công bằng List của Python, tích hợp epsilon động và cơ chế bắt lỗi ma trận suy biến.
-- **Notebook**: Giảng viên mở file part1/part1_demo.ipynb và bấm Run All. Notebook sẽ tự động gọi 6 Test Cases, tính toán nghiệm và dùng thư viện NumPy để đối chiếu sai số $10^{-5}$.
+- **Notebook**: File part1/part1_demo.ipynb và bấm Run All. Notebook sẽ tự động gọi 6 Test Cases, tính toán nghiệm và dùng thư viện NumPy để đối chiếu sai số $10^{-5}$.
 
 ### 2. Phần 2: Phân Rã Ma Trận và Trực Quan Hóa
 
